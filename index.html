@@ -3,116 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Récompenses Posty78</title>
 
 <style>
-
-body{
-    margin:0;
-    background:#050505;
-    color:white;
-    font-family:Arial,sans-serif;
-}
-
-.container{
-    max-width:900px;
-    margin:auto;
-    padding:20px;
-}
-
-h1{
-    text-align:center;
-    color:#53fc18;
-}
-
-.card{
-    background:#111;
-    border:1px solid #2b2b2b;
-    border-radius:18px;
-    padding:20px;
-    margin-top:20px;
-}
-
-input{
-    width:100%;
-    box-sizing:border-box;
-    padding:15px;
-    border-radius:12px;
-    border:1px solid #333;
-    background:#050505;
-    color:white;
-    font-size:18px;
-}
-
-button{
-    margin-top:12px;
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    background:#53fc18;
-    color:black;
-    font-weight:bold;
-    font-size:18px;
-    cursor:pointer;
-}
-
-.result{
-    margin-top:20px;
-    padding:20px;
-    border-radius:12px;
-    background:#070707;
-    display:none;
-}
-
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020202,#071607,#000);color:white}
+.container{max-width:1200px;margin:auto;padding:20px}
+h1{text-align:center;color:#53fc18}
+.card{background:#111;border:1px solid #2b2b2b;border-radius:18px;padding:20px;margin:20px 0}
+input{width:100%;padding:15px;border-radius:12px;border:1px solid #333;background:#050505;color:white;font-size:18px}
+button{width:100%;padding:15px;margin-top:12px;border:0;border-radius:12px;background:#53fc18;color:black;font-weight:bold;font-size:18px}
+.result{display:none;background:#070707;border:1px solid #333;border-radius:14px;padding:20px;margin-top:20px}
+table{width:100%;border-collapse:collapse;margin-top:15px;font-size:14px}
+th,td{border-bottom:1px solid #333;padding:10px;text-align:left}
+th{color:#53fc18}
+.code{filter:blur(3px);user-select:none}
+.ok{color:#53fc18;font-weight:bold}
+.no{color:#ff5555;font-weight:bold}
+.table-wrap{overflow-x:auto}
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
 <h1>Récompenses Posty78</h1>
 
 <div class="card">
-
-<p>
-Entrez votre numéro de billet :
-</p>
-
-<input
-id="ticket"
-placeholder="Ex : 0006">
-
-<button onclick="rechercher()">
-Rechercher
-</button>
-
-<div id="result" class="result">
-
-Aucun résultat.
-
+  <h2>Rechercher un billet</h2>
+  <input id="search" placeholder="Ex : 0006">
+  <button onclick="searchTicket()">Rechercher</button>
+  <div id="result" class="result"></div>
 </div>
 
+<div class="card">
+  <h2>Liste complète des billets</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>N° Billet</th>
+          <th>Gain</th>
+          <th>Code secret</th>
+          <th>Distribué</th>
+          <th>Réclamé</th>
+          <th>Date</th>
+          <th>Réclamé par</th>
+          <th>Commentaire</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="8">Chargement...</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 </div>
 
 <script>
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlADyfV9WVcxtrrgHlpm8pOM94rOL7Xcg2bevTDf54bvuZ_MV8fqTp9KbnAh64w1buNxD5Rm8iLDo_/pub?output=csv";
+let rows = [];
 
-function rechercher(){
-
-let numero =
-document.getElementById("ticket").value;
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("result").innerHTML =
-"Recherche du billet : <b>" + numero + "</b><br><br>Version de test.";
-
+function pad(num){
+  return String(num).replace(/\D/g,"").padStart(4,"0");
 }
 
+function maskCode(code){
+  if(!code) return "";
+  return code.slice(0,2) + "****";
+}
+
+function parseCSV(text){
+  const lines = text.trim().split(/\r?\n/);
+  const headers = lines[0].split(",");
+  return lines.slice(1).map(line => {
+    const values = line.split(",");
+    let obj = {};
+    headers.forEach((h,i)=> obj[h.trim()] = (values[i] || "").trim());
+    return obj;
+  });
+}
+
+function status(value){
+  if(!value) return '<span class="no">Non</span>';
+  const v = value.toLowerCase();
+  if(v.includes("oui") || v.includes("true") || v.includes("x")) return '<span class="ok">Oui</span>';
+  return value;
+}
+
+function renderTable(){
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+
+  rows.forEach(r => {
+    const num = pad(r["N° Billet"]);
+    tbody.innerHTML += `
+      <tr>
+        <td><strong>${num}</strong></td>
+        <td>${r["Gain"] || ""}</td>
+        <td class="code">${maskCode(r["Code secret"])}</td>
+        <td>${status(r["Distribué"])}</td>
+        <td>${status(r["Réclamé"])}</td>
+        <td>${r["Date de réclamation"] || ""}</td>
+        <td>${r["Réclamé par"] || ""}</td>
+        <td>${r["Commentaire"] || ""}</td>
+      </tr>
+    `;
+  });
+}
+
+function searchTicket(){
+  const wanted = pad(document.getElementById("search").value);
+  const found = rows.find(r => pad(r["N° Billet"]) === wanted);
+  const box = document.getElementById("result");
+  box.style.display = "block";
+
+  if(!found){
+    box.innerHTML = `Aucun billet trouvé pour <strong>${wanted}</strong>.`;
+    return;
+  }
+
+  box.innerHTML = `
+    <h2>Billet ${wanted}</h2>
+    <p><strong>Gain :</strong> ${found["Gain"] || ""}</p>
+    <p><strong>Code secret :</strong> <span class="code">${maskCode(found["Code secret"])}</span></p>
+    <p><strong>Distribué :</strong> ${status(found["Distribué"])}</p>
+    <p><strong>Réclamé :</strong> ${status(found["Réclamé"])}</p>
+    <p><strong>Date de réclamation :</strong> ${found["Date de réclamation"] || ""}</p>
+    <p><strong>Réclamé par :</strong> ${found["Réclamé par"] || ""}</p>
+    <p><strong>Commentaire :</strong> ${found["Commentaire"] || ""}</p>
+  `;
+}
+
+fetch(csvUrl)
+  .then(r => r.text())
+  .then(text => {
+    rows = parseCSV(text);
+    renderTable();
+  })
+  .catch(() => {
+    document.getElementById("tableBody").innerHTML =
+    '<tr><td colspan="8">Erreur de chargement du Google Sheet.</td></tr>';
+  });
 </script>
 
 </body>
