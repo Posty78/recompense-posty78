@@ -1,25 +1,17 @@
-/**
- * app.js
- * Lit le Google Sheets public en CSV et permet de vérifier un billet.
- * Affiche aussi le tableau complet des billets.
- */
-
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlADyfV9WVcxtrrgHlpm8pOM94rOL7Xcg2bevTDf54bvuZ_MV8fqTp9KbnAh64w1buNxD5Rm8iLDo_/pub?output=csv";
 
-// ─── DOM ───────────────────────────────────────────────────────────────────
-const input      = document.getElementById("billet-input");
-const btnVerify  = document.getElementById("btn-verify");
-const resultEl   = document.getElementById("result");
-const errorEl    = document.getElementById("error");
-const loaderEl   = document.getElementById("loader");
-const tbody      = document.getElementById("billets-tbody");
-const tableLoader= document.getElementById("table-loader");
-const filterBtns = document.querySelectorAll(".filter-btn");
+const input       = document.getElementById("billet-input");
+const btnVerify   = document.getElementById("btn-verify");
+const resultEl    = document.getElementById("result");
+const errorEl     = document.getElementById("error");
+const loaderEl    = document.getElementById("loader");
+const tbody       = document.getElementById("billets-tbody");
+const tableLoader = document.getElementById("table-loader");
+const filterBtns  = document.querySelectorAll(".filter-btn");
 
-// ─── État ──────────────────────────────────────────────────────────────────
-let billets      = [];
-let filtreActif  = "tous";
+let billets     = [];
+let filtreActif = "tous";
 
 // ─── CSV Parser ────────────────────────────────────────────────────────────
 
@@ -40,9 +32,11 @@ function splitCSVLine(line) {
 function parseCSV(text) {
   const lines = text.trim().split("\n");
   if (lines.length < 2) return [];
+  // Nettoyer les en-têtes : minuscules + trim
   const headers = lines[0].split(",").map((h) =>
-    h.trim().replace(/^"|"$/g, "").toLowerCase()
+    h.trim().replace(/^"|"$/g, "").toLowerCase().trim()
   );
+  console.log("[app] Colonnes détectées :", headers);
   return lines.slice(1).map((line) => {
     const values = splitCSVLine(line);
     const obj = {};
@@ -75,15 +69,21 @@ function normalizeNumero(val) {
 }
 
 function getNumero(b) {
-  return (b["n° billet"] || b["numero"] || b["billet"] || b["n°billet"] || b["n°"] || "")
-    .trim().padStart(4, "0");
+  // Cherche toutes les variantes possibles du numéro de billet
+  const val = (
+    b["n° billet"] || b["n°billet"] || b["numero"] ||
+    b["billet"] || b["n°"] || b["no billet"] || ""
+  ).trim();
+  return val.padStart(4, "0");
 }
 
 function getStatut(b) {
-  const reclame   = (b["réclamé"]  || b["reclame"]  || "").toLowerCase();
-  const distribue = (b["distribué"] || b["distribue"] || "").toLowerCase();
-  if (reclame === "oui" || reclame === "true" || reclame === "1") return "reclame";
-  if (distribue === "oui" || distribue === "true" || distribue === "1") return "distribue";
+  // Nettoie et normalise les valeurs avec espaces éventuels
+  const reclame   = (b["réclamé"] || b["reclame"] || b["réclamé "] || b["reclame "] || "").toLowerCase().trim();
+  const distribue = (b["distribué"] || b["distribue"] || b["distribué "] || b["distribue "] || "").toLowerCase().trim();
+
+  if (reclame === "oui" || reclame === "true" || reclame === "1" || reclame === "x") return "reclame";
+  if (distribue === "oui" || distribue === "true" || distribue === "1" || distribue === "x") return "distribue";
   return "libre";
 }
 
@@ -91,6 +91,25 @@ function getStatutLabel(statut) {
   if (statut === "reclame")   return "Réclamé ✓";
   if (statut === "distribue") return "Distribué";
   return "À distribuer";
+}
+
+function getDate(b) {
+  return (
+    b["date de réclamation"] || b["date de reclamation"] ||
+    b["date réclamation"]    || b["date reclamation"] ||
+    b["date"] || "—"
+  ).trim() || "—";
+}
+
+function getPseudo(b) {
+  return (
+    b["réclamé par"] || b["reclame par"] ||
+    b["réclamé par "] || b["reclame par "] || ""
+  ).trim() || "—";
+}
+
+function getCommentaire(b) {
+  return (b["commentaire"] || "—").trim() || "—";
 }
 
 function getGainClass(gain) {
@@ -103,7 +122,7 @@ function getGainClass(gain) {
   return "gain--10";
 }
 
-// ─── Tableau complet ───────────────────────────────────────────────────────
+// ─── Tableau ───────────────────────────────────────────────────────────────
 
 function renderTable(data) {
   if (!tbody) return;
@@ -113,33 +132,30 @@ function renderTable(data) {
     : data.filter((b) => getStatut(b) === filtreActif);
 
   if (!filtered.length) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:32px;">Aucun billet dans cette catégorie.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:32px;">Aucun billet dans cette catégorie.</td></tr>`;
     return;
   }
 
   tbody.innerHTML = filtered.map((b) => {
-    const numero   = getNumero(b);
-    const gain     = b["gain"] || "—";
-    const statut   = getStatut(b);
-    const label    = getStatutLabel(statut);
-    const distribue= (b["distribué"] || b["distribue"] || "—");
-    const pseudo   = b["réclamé par"] || b["reclame par"] || "—";
-    const date     = b["date"] || "—";
-    const comment  = b["commentaire"] || "—";
-
-    // Code secret — JAMAIS affiché
-    const gainClass   = getGainClass(gain);
-    const badgeClass  = `badge badge--${statut}`;
+    const numero    = getNumero(b);
+    const gain      = b["gain"] || "—";
+    const statut    = getStatut(b);
+    const label     = getStatutLabel(statut);
+    const distribue = (b["distribué"] || b["distribue"] || b["distribué "] || "—").trim() || "—";
+    const pseudo    = getPseudo(b);
+    const date      = getDate(b);
+    const comment   = getCommentaire(b);
+    const gainClass = getGainClass(gain);
 
     return `
       <tr>
         <td><strong>${numero}</strong></td>
         <td class="${gainClass}">${gain}</td>
-        <td><span class="${badgeClass}">${label}</span></td>
+        <td><span class="badge badge--${statut}">${label}</span></td>
         <td>${distribue}</td>
         <td>${pseudo}</td>
         <td>${date}</td>
-        <td style="color:var(--text-muted); font-family:var(--font);">${comment}</td>
+        <td style="color:var(--text-muted);font-family:var(--font);">${comment}</td>
       </tr>
     `;
   }).join("");
@@ -156,14 +172,19 @@ filterBtns.forEach((btn) => {
   });
 });
 
-// ─── Vérification billet ───────────────────────────────────────────────────
+// ─── Vérification ──────────────────────────────────────────────────────────
 
-function showLoader()  { loaderEl.style.display = "flex"; resultEl.style.display = "none"; errorEl.style.display = "none"; }
-function hideLoader()  { loaderEl.style.display = "none"; }
+function showLoader()  {
+  loaderEl.style.display = "flex";
+  resultEl.style.display = "none";
+  errorEl.style.display  = "none";
+}
+
+function hideLoader() { loaderEl.style.display = "none"; }
 
 function showError(msg) {
   hideLoader();
-  errorEl.style.display = "block";
+  errorEl.style.display  = "block";
   resultEl.style.display = "none";
   document.getElementById("error-message").textContent = msg;
 }
@@ -185,12 +206,8 @@ function showResult(billet, numero) {
   statutEl.textContent = label;
   statutEl.className   = `result__statut result__statut--${statut}`;
   document.getElementById("result-statut-detail").textContent = label;
-
-  document.getElementById("result-date").textContent =
-    billet["date"] || "—";
-
-  const pseudo = billet["réclamé par"] || billet["reclame par"] || "";
-  document.getElementById("result-pseudo").textContent = pseudo || "—";
+  document.getElementById("result-date").textContent   = getDate(billet);
+  document.getElementById("result-pseudo").textContent = getPseudo(billet);
 }
 
 async function verify() {
