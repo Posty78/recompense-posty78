@@ -1,477 +1,198 @@
-/* ─── Variables ─────────────────────────────────────────────────────────── */
-:root {
-  --black:      #000000;
-  --bg:         #0a0a0a;
-  --bg-card:    rgba(0, 0, 0, 0.75);
-  --border:     rgba(0, 204, 68, 0.25);
-  --border-strong: rgba(0, 204, 68, 0.6);
-  --green:      #00cc44;
-  --green-dim:  rgba(0, 204, 68, 0.1);
-  --gold:       #f59e0b;
-  --gold-dim:   rgba(245, 158, 11, 0.15);
-  --red:        #ef4444;
-  --white:      #ffffff;
-  --text:       #ffffff;
-  --text-muted: #6b8f6b;
-  --font:       "Inter", system-ui, sans-serif;
-  --mono:       "JetBrains Mono", monospace;
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
-  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ─── Reset ──────────────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: none; }
-
-/* ─── Header ─────────────────────────────────────────────────────────────── */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(0,0,0,0.90);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-}
-
-.header__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header__brand { display: flex; flex-direction: column; gap: 2px; }
-
-.header__eyebrow {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--green);
-}
-
-.header__name {
-  font-size: 60px;
-  font-weight: 900;
-  color: var(--white);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.header__kick {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--green);
-  background: var(--green-dim);
-  border: 1px solid var(--border);
-  padding: 8px 18px;
-  border-radius: var(--radius-md);
-  transition: all var(--transition);
-  letter-spacing: 0.02em;
-}
-
-.header__kick:hover {
-  background: rgba(0,204,68,0.18);
-  border-color: var(--green);
-}
-
-/* ─── Hero ───────────────────────────────────────────────────────────────── */
-.hero { padding: 60px 24px 40px; }
-
-.hero__inner {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-}
-
-.hero__eyebrow {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 0.06em;
-}
-
-.hero__title {
-  font-size: 42px;
-  font-weight: 900;
-  color: var(--white);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.hero__sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.6;
-  max-width: 480px;
-}
-
-.hero__sub strong { color: var(--green); }
-
-/* ─── Search Card ────────────────────────────────────────────────────────── */
-.search-card {
-  width: 100%;
-  max-width: 500px;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  backdrop-filter: blur(12px);
-  margin-top: 8px;
-}
-
-.search-card__label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--green);
-  text-align: left;
-}
-
-.search-card__row { display: flex; gap: 10px; }
-
-.search-card__input {
-  flex: 1;
-  height: 54px;
-  padding: 0 18px;
-  background: rgba(0,204,68,0.04);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  color: var(--white);
-  font-size: 20px;
-  font-family: var(--mono);
-  font-weight: 600;
-  outline: none;
-  transition: border-color var(--transition);
-  -moz-appearance: textfield;
-}
-
-.search-card__input::-webkit-outer-spin-button,
-.search-card__input::-webkit-inner-spin-button { -webkit-appearance: none; }
-
-.search-card__input:focus { border-color: var(--green); }
-.search-card__input::placeholder { color: rgba(255,255,255,0.2); font-size: 15px; }
-
-.search-card__btn {
-  height: 54px;
-  padding: 0 28px;
-  background: var(--green);
-  color: #000;
-  font-size: 15px;
-  font-weight: 800;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: opacity var(--transition);
-  white-space: nowrap;
-  font-family: var(--font);
-}
-
-.search-card__btn:hover { opacity: 0.88; }
-.search-card__hint { font-size: 12px; color: var(--text-muted); text-align: left; }
-
-/* ─── Loader ─────────────────────────────────────────────────────────────── */
-.loader { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--green); margin-top: 8px; }
-
-.loader__spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(0,204,68,0.2);
-  border-top-color: var(--green);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ─── Résultat ───────────────────────────────────────────────────────────── */
-.result {
-  width: 100%;
-  max-width: 500px;
-  background: var(--bg-card);
-  border: 2px solid var(--green);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  backdrop-filter: blur(12px);
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.result__header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-
-.result__numero {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 700;
-  color: #000;
-  background: var(--green);
-  padding: 4px 12px;
-  border-radius: 6px;
-}
-
-.result__statut { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; }
-.result__statut--libre    { color: var(--green); background: var(--green-dim); border: 1px solid var(--border); }
-.result__statut--reclame  { color: #000; background: var(--green); border: 1px solid var(--green); }
-.result__statut--distribue{ color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(245,158,11,0.3); }
-
-.result__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-.result__cell {
-  background: rgba(0,204,68,0.04);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.result__cell-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
-.result__cell-value { font-size: 15px; font-weight: 600; color: var(--white); }
-
-.result__gain {
-  font-size: 28px !important;
-  font-weight: 900 !important;
-  font-family: var(--mono);
-  color: var(--green) !important;
-}
-
-.result__cta {
-  display: block;
-  width: 100%;
-  padding: 16px;
-  background: var(--green);
-  color: #000;
-  font-size: 15px;
-  font-weight: 800;
-  text-align: center;
-  border-radius: var(--radius-md);
-  transition: opacity var(--transition);
-  font-family: var(--font);
-}
-
-.result__cta:hover { opacity: 0.88; }
-
-/* ─── Erreur ─────────────────────────────────────────────────────────────── */
-.error-card {
-  width: 100%;
-  max-width: 500px;
-  background: rgba(239,68,68,0.08);
-  border: 1px solid rgba(239,68,68,0.3);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fca5a5;
-  text-align: center;
-  animation: fadeIn 0.3s ease;
-}
-
-/* ─── Stats ──────────────────────────────────────────────────────────────── */
-.stats {
-  padding: 40px 24px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: rgba(0,204,68,0.02);
-}
-
-.stats__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.stat { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-
-.stat__value {
-  font-size: 28px;
-  font-weight: 900;
-  font-family: var(--mono);
-  color: var(--green);
-}
-
-.stat__label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
-
-/* ─── Gains ──────────────────────────────────────────────────────────────── */
-.gains { padding: 60px 24px; }
-
-.gains__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.gains__title { font-size: 24px; font-weight: 800; color: var(--white); text-align: center; }
-
-.gains__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.gain-item {
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  backdrop-filter: blur(8px);
-  transition: border-color var(--transition);
-}
-
-.gain-item:hover { border-color: var(--green); }
-.gain-item--gold { border-color: rgba(245,158,11,0.4); background: var(--gold-dim); }
-.gain-item--silver { border-color: rgba(200,200,200,0.3); background: rgba(200,200,200,0.05); }
-
-.gain-item__amount { font-size: 24px; font-weight: 900; font-family: var(--mono); color: var(--green); }
-.gain-item--gold .gain-item__amount { color: var(--gold); }
-.gain-item--silver .gain-item__amount { color: #e2e2e2; }
-.gain-item__count { font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.08em; }
-
-/* ─── Tableau des billets ────────────────────────────────────────────────── */
-.billets-section { padding: 60px 24px; border-top: 1px solid var(--border); }
-
-.billets-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.billets-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-.billets-title { font-size: 22px; font-weight: 800; color: var(--white); }
-.billets-filters { display: flex; gap: 8px; flex-wrap: wrap; }
-
-.filter-btn {
-  padding: 6px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all var(--transition);
-  font-family: var(--font);
-}
-
-.filter-btn:hover { border-color: var(--green); color: var(--green); }
-.filter-btn.is-active { background: var(--green-dim); border-color: var(--green); color: var(--green); }
-
-.table-loader { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--green); padding: 20px 0; }
-
-.billets-table-wrap {
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  scrollbar-width: thin;
-  scrollbar-color: var(--green) transparent;
-}
-
-.billets-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.billets-table thead { background: rgba(0,204,68,0.06); border-bottom: 1px solid var(--border); }
-
-.billets-table th {
-  padding: 12px 16px;
-  text-align: left;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--green);
-  white-space: nowrap;
-}
-
-.billets-table td {
-  padding: 10px 16px;
-  border-bottom: 1px solid rgba(0,204,68,0.06);
-  color: var(--white);
-  font-family: var(--mono);
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-.billets-table tbody tr:hover { background: rgba(0,204,68,0.04); }
-.billets-table tbody tr:last-child td { border-bottom: none; }
-
-.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-.badge--libre     { color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
-.badge--distribue { color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(245,158,11,0.3); }
-.badge--reclame   { color: #000; background: var(--green); border: 1px solid var(--green); }
-
-.gain--500 { color: #f59e0b; font-weight: 700; }
-.gain--100 { color: #818cf8; font-weight: 700; }
-.gain--50  { color: #00cc44; font-weight: 600; }
-.gain--30  { color: #c084fc; }
-.gain--20  { color: #22d3ee; }
-.gain--10  { color: #9ca3af; }
-
-/* ─── Footer ─────────────────────────────────────────────────────────────── */
-.footer { border-top: 1px solid var(--border); padding: 32px 24px; background: rgba(0,0,0,0.6); }
-
-.footer__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-}
-
-.footer__inner p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-.footer__links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
-.footer__links a { font-size: 13px; font-weight: 600; color: var(--green); transition: opacity var(--transition); }
-.footer__links a:hover { opacity: 0.75; }
-
-/* ─── Responsive ─────────────────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .hero__title { font-size: 28px; }
-  .hero { padding: 40px 16px 24px; }
-  .search-card { padding: 20px 16px; }
-  .search-card__row { flex-direction: column; }
-  .search-card__btn { height: 48px; }
-  .search-card__input { height: 48px; font-size: 18px; }
-  .stats__inner { grid-template-columns: repeat(2, 1fr); }
-  .gains__grid { grid-template-columns: repeat(2, 1fr); }
-  .result__grid { grid-template-columns: 1fr; }
-  .result__gain { font-size: 22px !important; }
-  .header__inner { padding: 12px 16px; }
-  .header__name { font-size: 36px; }
-  .header__kick { font-size: 12px; padding: 6px 12px; }
-  .billets-header { flex-direction: column; align-items: flex-start; }
-  .billets-table td, .billets-table th { padding: 8px 12px; }
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vérifie ton billet collector du Tour de France des 1500 McDo — Posty78" />
+  <title>Vérification billet — Posty78</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">
+        <span class="header__eyebrow">Tour de France des 1500 McDo</span>
+        <span class="header__name">Posty78</span>
+      </div>
+      <a href="https://kick.com/posty78" target="_blank" class="header__kick">
+        🟢 kick.com/posty78
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow">🎁 Tous les billets sont gagnants</p>
+      <h1 class="hero__title">Vérifie ton billet collector</h1>
+      <p class="hero__sub">Plus de <strong>70 000 €</strong> à gagner — entre ton numéro de billet pour connaître ton gain.</p>
+
+      <div class="search-card">
+        <label class="search-card__label" for="billet-input">Numéro de billet</label>
+        <div class="search-card__row">
+          <input
+            id="billet-input"
+            type="number"
+            min="1"
+            max="1500"
+            placeholder="Ex : 0001 ou 742"
+            class="search-card__input"
+            autocomplete="off"
+          />
+          <button id="btn-verify" class="search-card__btn">Vérifier</button>
+        </div>
+        <p class="search-card__hint">Entre le numéro inscrit sur ton billet (entre 1 et 1500)</p>
+      </div>
+
+      <div id="result" class="result" style="display:none;">
+        <div class="result__header">
+          <span id="result-numero" class="result__numero"></span>
+          <span id="result-statut" class="result__statut"></span>
+        </div>
+        <div class="result__grid">
+          <div class="result__cell">
+            <span class="result__cell-label">Gain</span>
+            <span id="result-gain" class="result__cell-value result__gain"></span>
+          </div>
+          <div class="result__cell">
+            <span class="result__cell-label">Statut</span>
+            <span id="result-statut-detail" class="result__cell-value"></span>
+          </div>
+          <div class="result__cell">
+            <span class="result__cell-label">Date</span>
+            <span id="result-date" class="result__cell-value"></span>
+          </div>
+          <div class="result__cell">
+            <span class="result__cell-label">Réclamé par</span>
+            <span id="result-pseudo" class="result__cell-value"></span>
+          </div>
+        </div>
+        <a id="btn-claim" href="https://giveaway.posty78.fr" target="_blank" class="result__cta">
+          🎁 Réclamer mon gain sur giveaway.posty78.fr
+        </a>
+      </div>
+
+      <div id="error" class="error-card" style="display:none;">
+        <p id="error-message"></p>
+      </div>
+
+      <div id="loader" class="loader" style="display:none;">
+        <div class="loader__spinner"></div>
+        <span>Vérification en cours…</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stats__inner">
+      <div class="stat">
+        <span class="stat__value">1 500</span>
+        <span class="stat__label">Billets uniques</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">36 500 €</span>
+        <span class="stat__label">Billets collectors</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">100%</span>
+        <span class="stat__label">Gagnants</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">365</span>
+        <span class="stat__label">Jours de voyage</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="gains">
+    <div class="gains__inner">
+      <h2 class="gains__title">Répartition des gains</h2>
+      <div class="gains__grid">
+        <div class="gain-item gain-item--500">
+          <span class="gain-item__amount">500 €</span>
+          <span class="gain-item__count">10 billets</span>
+        </div>
+        <div class="gain-item gain-item--100">
+          <span class="gain-item__amount">100 €</span>
+          <span class="gain-item__count">40 billets</span>
+        </div>
+        <div class="gain-item gain-item--50">
+          <span class="gain-item__amount">50 €</span>
+          <span class="gain-item__count">100 billets</span>
+        </div>
+        <div class="gain-item gain-item--30">
+          <span class="gain-item__amount">30 €</span>
+          <span class="gain-item__count">200 billets</span>
+        </div>
+        <div class="gain-item gain-item--20">
+          <span class="gain-item__amount">20 €</span>
+          <span class="gain-item__count">500 billets</span>
+        </div>
+        <div class="gain-item gain-item--10">
+          <span class="gain-item__amount">10 €</span>
+          <span class="gain-item__count">650 billets</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="billets-section">
+    <div class="billets-inner">
+      <div class="billets-header">
+        <h2 class="billets-title">📋 Tableau complet des billets</h2>
+        <div class="billets-filters">
+          <button class="filter-btn is-active" data-filter="tous">Tous</button>
+          <button class="filter-btn" data-filter="distribue">Distribués</button>
+          <button class="filter-btn" data-filter="reclame">Réclamés</button>
+          <button class="filter-btn" data-filter="libre">À distribuer</button>
+        </div>
+      </div>
+
+      <div id="table-loader" class="table-loader">
+        <div class="loader__spinner"></div>
+        <span>Chargement des billets…</span>
+      </div>
+
+      <div class="billets-table-wrap">
+        <table class="billets-table" id="billets-table">
+          <thead>
+            <tr>
+              <th>N° Billet</th>
+              <th>Gain</th>
+              <th>Statut</th>
+              <th>Distribué</th>
+              <th>Réclamé par</th>
+              <th>Date</th>
+              <th>Commentaire</th>
+            </tr>
+          </thead>
+          <tbody id="billets-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p>Tous les billets sont gagnants. Les codes de réclamation restent privés.</p>
+      <p>La vérification publique ne permet pas de réclamer un gain sans code unique.</p>
+      <div class="footer__links">
+        <a href="https://giveaway.posty78.fr" target="_blank">giveaway.posty78.fr</a>
+        <a href="https://kick.com/posty78" target="_blank">kick.com/posty78</a>
+        <a href="https://maps.posty78.fr" target="_blank">maps.posty78.fr</a>
+        <a href="./reglement" target="_blank">Règlement officiel</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/app.js"></script>
+
+</body>
+</html>
