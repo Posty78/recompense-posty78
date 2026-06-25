@@ -38,11 +38,7 @@
       z-index: 10;
     }
 
-    .header-brand {
-      display: flex;
-      flex-direction: column;
-    }
-
+    .header-brand { display: flex; flex-direction: column; }
     .header-eyebrow {
       font-size: 10px;
       font-weight: 600;
@@ -50,11 +46,7 @@
       text-transform: uppercase;
       color: var(--green);
     }
-
-    .header-name {
-      font-size: 18px;
-      font-weight: 900;
-    }
+    .header-name { font-size: 18px; font-weight: 900; }
 
     .header-back {
       font-size: 13px;
@@ -65,24 +57,11 @@
       border-radius: 8px;
       transition: background 0.2s;
     }
+    .header-back:hover { background: rgba(0,255,0,0.08); text-decoration: none; }
 
-    .header-back:hover {
-      background: rgba(0,255,0,0.08);
-      text-decoration: none;
-    }
+    main { max-width: 800px; margin: 0 auto; padding: 60px 24px 80px; }
 
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 24px 80px;
-    }
-
-    .page-title {
-      font-size: 28px;
-      font-weight: 900;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
+    .page-title { font-size: 28px; font-weight: 900; margin-bottom: 6px; }
 
     .page-sub {
       font-size: 13px;
@@ -90,6 +69,17 @@
       margin-bottom: 48px;
       padding-bottom: 24px;
       border-bottom: 1px solid var(--border);
+    }
+
+    .disclaimer {
+      background: rgba(0,255,0,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      line-height: 1.6;
     }
 
     h2 {
@@ -104,42 +94,17 @@
       border-bottom: 1px solid var(--border);
     }
 
-    h3 {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-top: 20px;
-      margin-bottom: 8px;
-    }
+    h3 { font-size: 14px; font-weight: 700; margin-top: 20px; margin-bottom: 8px; }
 
-    p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 12px;
-    }
+    p { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 12px; }
 
-    ul, ol {
-      padding-left: 20px;
-      margin-bottom: 12px;
-    }
+    ul, ol { padding-left: 20px; margin-bottom: 12px; }
 
-    li {
-      font-size: 14px;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 6px;
-    }
+    li { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 6px; }
 
-    strong {
-      color: var(--text);
-      font-weight: 700;
-    }
+    strong { color: var(--text); font-weight: 700; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
-      font-size: 13px;
-    }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 13px; }
 
     th {
       background: rgba(0,255,0,0.06);
@@ -167,11 +132,7 @@
       color: var(--muted);
     }
 
-    .signature strong {
-      color: var(--text);
-      display: block;
-      margin-bottom: 4px;
-    }
+    .signature strong { color: var(--text); display: block; margin-bottom: 4px; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -186,7 +147,6 @@
     @media (max-width: 640px) {
       main { padding: 40px 16px 60px; }
       .page-title { font-size: 22px; }
-      table { font-size: 12px; }
       td, th { padding: 8px 10px; }
     }
   </style>
@@ -209,17 +169,23 @@
     En vigueur à compter du 1er septembre 2026
   </p>
 
+  <div class="disclaimer">
+    ⚠️ <strong>Mention légale importante</strong> — Ce projet est une initiative personnelle et professionnelle indépendante. Aucun établissement de restauration rapide n'est partenaire, sponsor, co-organisateur ou affilié à ce projet. Les lieux visités au cours du projet le sont à titre personnel et dans le cadre de la production de contenu audiovisuel.
+  </div>
+
   <h2>Article 1 — Organisateur</h2>
-  <p><strong>Jean-Didier BARATA</strong><br>
-  Créateur de contenu professionnel — Micro-entreprise<br>
-  SIRET : 102 191 756 00026<br>
-  Adresse : 200, Rue de la Croix Nivert — 75015 Paris<br>
-  Contact : contact@posty78.fr<br>
-  Plateforme principale : kick.com/posty78</p>
+  <p>
+    <strong>Jean-Didier BARATA</strong><br>
+    Créateur de contenu professionnel — Micro-entreprise<br>
+    SIRET : 102 191 756 00026<br>
+    Adresse : 200, Rue de la Croix Nivert — 75015 Paris<br>
+    Contact : contact@posty78.fr<br>
+    Plateforme principale : kick.com/posty78
+  </p>
   <p>L'Opération est indissociable du projet éditorial professionnel "Tour de France des 1500 McDo", consistant en la production et diffusion en direct d'un contenu audiovisuel sur Kick.com/posty78, pendant 365 jours consécutifs à compter du 1er septembre 2026. Les récompenses distribuées constituent un élément fondamental et indissociable du concept éditorial.</p>
 
   <h2>Article 2 — Définitions</h2>
-  <p><strong>Billet collector</strong> : carte physique numérotée de 0001 à 1500, distribuée gratuitement dans ou aux abords des établissements McDonald's visités. Chaque carte comporte un numéro visible et un code alphanumérique unique.</p>
+  <p><strong>Billet collector</strong> : carte physique numérotée de 0001 à 1500, distribuée gratuitement par l'Organisateur dans ou aux abords des établissements de restauration rapide visités au cours du projet. Chaque carte comporte un numéro visible et un code alphanumérique unique.</p>
   <p><strong>Code unique</strong> : identifiant alphanumérique confidentiel imprimé sur chaque Billet collector, nécessaire pour valider une réclamation. Ne doit jamais être communiqué publiquement.</p>
   <p><strong>Gain</strong> : récompense financière prédéterminée associée à chaque Billet collector selon la grille de l'Article 5.</p>
   <p><strong>Sites officiels</strong> : recompense.posty78.fr (vérification publique) et giveaway.posty78.fr (réclamation).</p>
@@ -237,9 +203,10 @@
     <li>Ne pas être membre de la famille directe de l'Organisateur</li>
   </ul>
   <h3>4.2 Obtention des billets</h3>
-  <p>Les Billets collectors sont distribués <strong>gratuitement</strong>. Aucun achat n'est requis. Aucune contrepartie financière n'est demandée.</p>
+  <p>Les Billets collectors sont distribués <strong>gratuitement</strong> par l'Organisateur dans ou aux abords des établissements de restauration rapide visités au cours du projet. Aucun achat n'est requis. Aucune contrepartie financière n'est demandée.</p>
 
   <h2>Article 5 — Grille des gains</h2>
+  <p>Chaque Billet collector donne droit à un Gain dont le montant est prédéterminé :</p>
   <table>
     <thead>
       <tr><th>Montant</th><th>Nombre de billets</th></tr>
@@ -268,32 +235,46 @@
   <h3>6.2 Délai</h3>
   <p>12 mois à compter de la date de distribution du billet. Passé ce délai, le Gain est définitivement perdu.</p>
   <h3>6.3 Confidentialité</h3>
-  <p>Le Code unique ne doit jamais être communiqué publiquement. Toute divulgation publique dégage l'Organisateur de toute responsabilité.</p>
+  <p>Le Code unique ne doit jamais être communiqué publiquement. Toute divulgation publique dégage l'Organisateur de toute responsabilité en cas d'utilisation frauduleuse par un tiers.</p>
 
   <h2>Article 7 — Validation et versement</h2>
   <p>L'Organisateur vérifie chaque réclamation et verse le Gain <strong>sous 48 à 72 heures ouvrées</strong> via PayPal ou Revolut. Le versement vaut preuve d'attribution et clôture définitive de la réclamation.</p>
-  <p>L'Organisateur conserve pour chaque versement : screenshot du message de réclamation, photo du billet, confirmation de paiement, date et montant.</p>
+  <p>L'Organisateur conserve pour chaque versement : screenshot du message de réclamation horodaté, photo du billet reçue, confirmation de paiement, date et montant.</p>
 
   <h2>Article 8 — Registre professionnel</h2>
-  <p>Un registre professionnel est tenu pour chaque réclamation validée (numéro de billet, montant, date, canal, pseudonyme, moyen de paiement, référence de transaction). Ce registre est conservé <strong>10 ans minimum</strong>.</p>
+  <p>Un registre professionnel est tenu pour chaque réclamation validée (numéro de billet, montant, date, canal, pseudonyme, moyen de paiement, référence de transaction). Ce registre est conservé <strong>10 ans minimum</strong> et constitue la pièce justificative principale en cas de contrôle administratif ou fiscal.</p>
 
   <h2>Article 9 — Protection contre la fraude</h2>
-  <p>Toute tentative de fraude ou falsification entraîne l'annulation immédiate de la réclamation et peut faire l'objet d'un signalement aux autorités compétentes.</p>
+  <p>Toute tentative de fraude, falsification ou utilisation d'un code obtenu de manière illicite entraîne l'annulation immédiate de la réclamation et peut faire l'objet d'un signalement aux autorités compétentes.</p>
 
   <h2>Article 10 — Données personnelles</h2>
-  <p><strong>Responsable</strong> : Jean-Didier BARATA — contact@posty78.fr<br>
-  <strong>Données collectées</strong> : pseudonyme, moyen de paiement.<br>
-  <strong>Conservation</strong> : 10 ans (obligations comptables et fiscales).<br>
-  <strong>Droits</strong> : accès, rectification, effacement sur demande à contact@posty78.fr.</p>
+  <p>
+    <strong>Responsable</strong> : Jean-Didier BARATA — contact@posty78.fr<br>
+    <strong>Données collectées</strong> : pseudonyme Discord ou Instagram, moyen de paiement.<br>
+    <strong>Finalité</strong> : traitement des réclamations, versement des gains, registre professionnel.<br>
+    <strong>Conservation</strong> : 10 ans (obligations comptables et fiscales).<br>
+    <strong>Droits</strong> : accès, rectification, effacement sur demande à contact@posty78.fr.
+  </p>
+  <p>Les pseudonymes des Gagnants peuvent être publiés sur recompense.posty78.fr à titre de transparence, sauf opposition expresse lors de la réclamation.</p>
 
   <h2>Article 11 — Responsabilité</h2>
-  <p>L'Organisateur ne saurait être tenu responsable en cas de perte ou vol du billet, divulgation publique du Code unique par le Participant, échec de paiement imputable à PayPal ou Revolut, ou compte de paiement invalide.</p>
+  <p>L'Organisateur ne saurait être tenu responsable en cas de :</p>
+  <ul>
+    <li>Perte, vol ou détérioration d'un Billet collector par le Participant</li>
+    <li>Divulgation publique du Code unique par le Participant</li>
+    <li>Délai ou échec de paiement imputable à PayPal ou Revolut</li>
+    <li>Compte PayPal ou Revolut invalide, inexistant ou bloqué</li>
+    <li>Inaccessibilité temporaire des sites officiels ou des canaux de réclamation</li>
+  </ul>
 
-  <h2>Article 12 — Modification</h2>
-  <p>L'Organisateur se réserve le droit de modifier ou d'interrompre l'Opération avec un préavis minimum de 7 jours publié sur les sites officiels.</p>
+  <h2>Article 12 — Modification et interruption</h2>
+  <p>L'Organisateur se réserve le droit de modifier ou d'interrompre l'Opération pour tout motif légitime, avec un préavis minimum de <strong>24 heures</strong> publié sur les sites officiels ou annoncé en direct sur kick.com/posty78.</p>
 
   <h2>Article 13 — Droit applicable et litiges</h2>
-  <p>Règlement soumis au <strong>droit français</strong>. Tout litige sera soumis aux tribunaux de Paris après tentative de résolution amiable.</p>
+  <p>Le présent règlement est soumis au <strong>droit français</strong>. Tout litige sera soumis aux tribunaux compétents de Paris après tentative de résolution amiable.</p>
+
+  <h2>Article 14 — Dépôt et opposabilité</h2>
+  <p>Le présent règlement est consultable sur recompense.posty78.fr/reglement et giveaway.posty78.fr. Il entre en vigueur le <strong>1er septembre 2026</strong>.</p>
 
   <div class="signature">
     <strong>Jean-Didier BARATA — Organisateur</strong>
