@@ -1,151 +1,173 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Récompenses Posty78</title>
-<link rel="icon" type="image/png" href="favicon.png.png">
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020202,#071607,#000);color:white}
-.container{max-width:1200px;margin:auto;padding:20px}
-h1{text-align:center;color:#53fc18}
-.card{background:#111;border:1px solid #2b2b2b;border-radius:18px;padding:20px;margin:20px 0}
-input{width:100%;padding:15px;border-radius:12px;border:1px solid #333;background:#050505;color:white;font-size:18px}
-button{width:100%;padding:15px;margin-top:12px;border:0;border-radius:12px;background:#53fc18;color:black;font-weight:bold;font-size:18px}
-.result{display:none;background:#070707;border:1px solid #333;border-radius:14px;padding:20px;margin-top:20px}
-table{width:100%;border-collapse:collapse;margin-top:15px;font-size:14px}
-th,td{border-bottom:1px solid #333;padding:10px;text-align:left}
-th{color:#53fc18}
-.code{filter:blur(3px);user-select:none}
-.ok{color:#53fc18;font-weight:bold}
-.no{color:#ff5555;font-weight:bold}
-.table-wrap{overflow-x:auto}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vérifie ton billet collector du Tour de France des 1500 McDo — Posty78" />
+  <title>Vérification billet — Posty78</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
-
 <body>
-<div class="container">
 
-<h1>Récompenses Posty78</h1>
-<link rel="icon" type="image/png" href="favicon.png">
-<div class="card">
-  <h2>Rechercher un billet</h2>
-  <input id="search" placeholder="Ex : 0006">
-  <button onclick="searchTicket()">Rechercher</button>
-  <div id="result" class="result"></div>
-</div>
+  <!-- ─── Header ──────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">
+        <span class="header__eyebrow">Tour de France des 1500 McDo</span>
+        <span class="header__name">Posty78</span>
+      </div>
+      <a href="https://kick.com/posty78" target="_blank" class="header__kick">
+        🟢 Live sur Kick
+      </a>
+    </div>
+  </header>
 
-<div class="card">
-  <h2>Liste complète des billets</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>N° Billet</th>
-          <th>Gain</th>
-          <th>Code secret</th>
-          <th>Distribué</th>
-          <th>Réclamé</th>
-          <th>Date</th>
-          <th>Réclamé par</th>
-          <th>Commentaire</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr><td colspan="8">Chargement...</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+  <!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow">🎁 Tous les billets sont gagnants</p>
+      <h1 class="hero__title">Vérifie ton billet collector</h1>
+      <p class="hero__sub">Plus de <strong>70 000 €</strong> à gagner — entre ton numéro de billet pour connaître ton gain.</p>
 
-</div>
+      <!-- ─── Formulaire de recherche ──────────────────────────────────── -->
+      <div class="search-card">
+        <label class="search-card__label" for="billet-input">Numéro de billet</label>
+        <div class="search-card__row">
+          <input
+            id="billet-input"
+            type="number"
+            min="1"
+            max="1500"
+            placeholder="Ex : 0001 ou 742"
+            class="search-card__input"
+            autocomplete="off"
+          />
+          <button id="btn-verify" class="search-card__btn">Vérifier</button>
+        </div>
+        <p class="search-card__hint">Entre le numéro inscrit sur ton billet (entre 1 et 1500)</p>
+      </div>
 
-<script>
-const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlADyfV9WVcxtrrgHlpm8pOM94rOL7Xcg2bevTDf54bvuZ_MV8fqTp9KbnAh64w1buNxD5Rm8iLDo_/pub?output=csv";
-let rows = [];
+      <!-- ─── Résultat ─────────────────────────────────────────────────── -->
+      <div id="result" class="result" style="display:none;">
 
-function pad(num){
-  return String(num).replace(/\D/g,"").padStart(4,"0");
-}
+        <div class="result__header">
+          <span id="result-numero" class="result__numero"></span>
+          <span id="result-statut" class="result__statut"></span>
+        </div>
 
-function maskCode(code){
-  if(!code) return "";
-  return code.slice(0,2) + "****";
-}
+        <div class="result__grid">
+          <div class="result__cell">
+            <span class="result__cell-label">Gain</span>
+            <span id="result-gain" class="result__cell-value result__gain"></span>
+          </div>
+          <div class="result__cell">
+            <span class="result__cell-label">Statut</span>
+            <span id="result-statut-detail" class="result__cell-value"></span>
+          </div>
+          <div class="result__cell">
+            <span class="result__cell-label">Date</span>
+            <span id="result-date" class="result__cell-value"></span>
+          </div>
+          <div class="result__cell">
+            <span class="result__cell-label">Réclamé par</span>
+            <span id="result-pseudo" class="result__cell-value"></span>
+          </div>
+        </div>
 
-function parseCSV(text){
-  const lines = text.trim().split(/\r?\n/);
-  const headers = lines[0].split(",");
-  return lines.slice(1).map(line => {
-    const values = line.split(",");
-    let obj = {};
-    headers.forEach((h,i)=> obj[h.trim()] = (values[i] || "").trim());
-    return obj;
-  });
-}
+        <a id="btn-claim" href="https://giveaway.posty78.fr" target="_blank" class="result__cta">
+          🎁 Réclamer mon gain sur giveaway.posty78.fr
+        </a>
 
-function status(value){
-  if(!value) return '<span class="no">Non</span>';
-  const v = value.toLowerCase();
-  if(v.includes("oui") || v.includes("true") || v.includes("x")) return '<span class="ok">Oui</span>';
-  return value;
-}
+      </div>
 
-function renderTable(){
-  const tbody = document.getElementById("tableBody");
-  tbody.innerHTML = "";
+      <!-- ─── Erreur ────────────────────────────────────────────────────── -->
+      <div id="error" class="error-card" style="display:none;">
+        <p id="error-message"></p>
+      </div>
 
-  rows.forEach(r => {
-    const num = pad(r["N° Billet"]);
-    tbody.innerHTML += `
-      <tr>
-        <td><strong>${num}</strong></td>
-        <td>${r["Gain"] || ""}</td>
-        <td class="code">${maskCode(r["Code secret"])}</td>
-        <td>${status(r["Distribué"])}</td>
-        <td>${status(r["Réclamé"])}</td>
-        <td>${r["Date de réclamation"] || ""}</td>
-        <td>${r["Réclamé par"] || ""}</td>
-        <td>${r["Commentaire"] || ""}</td>
-      </tr>
-    `;
-  });
-}
+      <!-- ─── Loader ────────────────────────────────────────────────────── -->
+      <div id="loader" class="loader" style="display:none;">
+        <div class="loader__spinner"></div>
+        <span>Vérification en cours…</span>
+      </div>
 
-function searchTicket(){
-  const wanted = pad(document.getElementById("search").value);
-  const found = rows.find(r => pad(r["N° Billet"]) === wanted);
-  const box = document.getElementById("result");
-  box.style.display = "block";
+    </div>
+  </section>
 
-  if(!found){
-    box.innerHTML = `Aucun billet trouvé pour <strong>${wanted}</strong>.`;
-    return;
-  }
+  <!-- ─── Stats ─────────────────────────────────────────────────────────── -->
+  <section class="stats">
+    <div class="stats__inner">
+      <div class="stat">
+        <span class="stat__value">1 500</span>
+        <span class="stat__label">Billets uniques</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">70 000 €</span>
+        <span class="stat__label">À gagner</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">100%</span>
+        <span class="stat__label">Gagnants</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">365</span>
+        <span class="stat__label">Jours de voyage</span>
+      </div>
+    </div>
+  </section>
 
-  box.innerHTML = `
-    <h2>Billet ${wanted}</h2>
-    <p><strong>Gain :</strong> ${found["Gain"] || ""}</p>
-    <p><strong>Code secret :</strong> <span class="code">${maskCode(found["Code secret"])}</span></p>
-    <p><strong>Distribué :</strong> ${status(found["Distribué"])}</p>
-    <p><strong>Réclamé :</strong> ${status(found["Réclamé"])}</p>
-    <p><strong>Date de réclamation :</strong> ${found["Date de réclamation"] || ""}</p>
-    <p><strong>Réclamé par :</strong> ${found["Réclamé par"] || ""}</p>
-    <p><strong>Commentaire :</strong> ${found["Commentaire"] || ""}</p>
-  `;
-}
+  <!-- ─── Répartition des gains ─────────────────────────────────────────── -->
+  <section class="gains">
+    <div class="gains__inner">
+      <h2 class="gains__title">Répartition des gains</h2>
+      <div class="gains__grid">
+        <div class="gain-item gain-item--gold">
+          <span class="gain-item__amount">500 €</span>
+          <span class="gain-item__count">10 billets</span>
+        </div>
+        <div class="gain-item gain-item--silver">
+          <span class="gain-item__amount">100 €</span>
+          <span class="gain-item__count">40 billets</span>
+        </div>
+        <div class="gain-item">
+          <span class="gain-item__amount">50 €</span>
+          <span class="gain-item__count">100 billets</span>
+        </div>
+        <div class="gain-item">
+          <span class="gain-item__amount">30 €</span>
+          <span class="gain-item__count">200 billets</span>
+        </div>
+        <div class="gain-item">
+          <span class="gain-item__amount">20 €</span>
+          <span class="gain-item__count">500 billets</span>
+        </div>
+        <div class="gain-item">
+          <span class="gain-item__amount">10 €</span>
+          <span class="gain-item__count">650 billets</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-fetch(csvUrl)
-  .then(r => r.text())
-  .then(text => {
-    rows = parseCSV(text);
-    renderTable();
-  })
-  .catch(() => {
-    document.getElementById("tableBody").innerHTML =
-    '<tr><td colspan="8">Erreur de chargement du Google Sheet.</td></tr>';
-  });
-</script>
+  <!-- ─── Footer ────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p>Tous les billets sont gagnants. Les codes de réclamation restent privés.</p>
+      <p>La vérification publique ne permet pas de réclamer un gain sans code unique.</p>
+      <div class="footer__links">
+        <a href="https://giveaway.posty78.fr" target="_blank">giveaway.posty78.fr</a>
+        <a href="https://kick.com/posty78" target="_blank">kick.com/posty78</a>
+        <a href="https://maps.posty78.fr" target="_blank">maps.posty78.fr</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/app.js"></script>
 
 </body>
 </html>
