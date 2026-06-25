@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Règlement officiel — Posty78</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --green: #00ff00;
+      --border: rgba(0,255,0,0.2);
+      --text: #ffffff;
+      --muted: #666;
+      --font: "Inter", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: rgba(0,0,0,0.9);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    .header-name {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .header-back {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .header-back:hover {
+      background: rgba(0,255,0,0.08);
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 12px;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 6px;
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    th {
+      background: rgba(0,255,0,0.06);
+      color: var(--green);
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(0,255,0,0.06);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .signature {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .signature strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--green); }
+
+    @media (max-width: 640px) {
+      main { padding: 40px 16px 60px; }
+      .page-title { font-size: 22px; }
+      table { font-size: 12px; }
+      td, th { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <span class="header-eyebrow">Tour de France des 1500 McDo</span>
+    <span class="header-name">Posty78</span>
+  </div>
+  <a href="https://recompense.posty78.fr" class="header-back">← Retour</a>
+</header>
+
+<main>
+
+  <h1 class="page-title">Règlement officiel</h1>
+  <p class="page-sub">
+    Opération de récompenses — "Tour de France des 1500 McDo" — Posty78 — Édition 2026-2027<br>
+    En vigueur à compter du 1er septembre 2026
+  </p>
+
+  <h2>Article 1 — Organisateur</h2>
+  <p><strong>Jean-Didier BARATA</strong><br>
+  Créateur de contenu professionnel — Micro-entreprise<br>
+  SIRET : 102 191 756 00026<br>
+  Adresse : 200, Rue de la Croix Nivert — 75015 Paris<br>
+  Contact : contact@posty78.fr<br>
+  Plateforme principale : kick.com/posty78</p>
+  <p>L'Opération est indissociable du projet éditorial professionnel "Tour de France des 1500 McDo", consistant en la production et diffusion en direct d'un contenu audiovisuel sur Kick.com/posty78, pendant 365 jours consécutifs à compter du 1er septembre 2026. Les récompenses distribuées constituent un élément fondamental et indissociable du concept éditorial.</p>
+
+  <h2>Article 2 — Définitions</h2>
+  <p><strong>Billet collector</strong> : carte physique numérotée de 0001 à 1500, distribuée gratuitement dans ou aux abords des établissements McDonald's visités. Chaque carte comporte un numéro visible et un code alphanumérique unique.</p>
+  <p><strong>Code unique</strong> : identifiant alphanumérique confidentiel imprimé sur chaque Billet collector, nécessaire pour valider une réclamation. Ne doit jamais être communiqué publiquement.</p>
+  <p><strong>Gain</strong> : récompense financière prédéterminée associée à chaque Billet collector selon la grille de l'Article 5.</p>
+  <p><strong>Sites officiels</strong> : recompense.posty78.fr (vérification publique) et giveaway.posty78.fr (réclamation).</p>
+  <p><strong>Canaux de réclamation</strong> : Discord #jd1819 (discord.posty78.fr) et Instagram @posty.78 (insta.posty78.fr).</p>
+
+  <h2>Article 3 — Nature juridique</h2>
+  <p>La présente Opération constitue un <strong>jeu promotionnel sans obligation d'achat</strong>, organisé dans le cadre de l'activité professionnelle de créateur de contenu de l'Organisateur. Les récompenses ont la nature juridique de <strong>lots promotionnels professionnels</strong>, et non de libéralités ou de dons au sens du Code civil.</p>
+
+  <h2>Article 4 — Conditions de participation</h2>
+  <h3>4.1 Éligibilité</h3>
+  <ul>
+    <li>Être âgé de 18 ans ou plus (ou mineur avec accord écrit du représentant légal)</li>
+    <li>Disposer d'un compte PayPal ou Revolut actif à son nom</li>
+    <li>Disposer d'un compte Discord ou Instagram permettant la réception de messages privés</li>
+    <li>Ne pas être membre de la famille directe de l'Organisateur</li>
+  </ul>
+  <h3>4.2 Obtention des billets</h3>
+  <p>Les Billets collectors sont distribués <strong>gratuitement</strong>. Aucun achat n'est requis. Aucune contrepartie financière n'est demandée.</p>
+
+  <h2>Article 5 — Grille des gains</h2>
+  <table>
+    <thead>
+      <tr><th>Montant</th><th>Nombre de billets</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>500 €</td><td>10 billets</td></tr>
+      <tr><td>100 €</td><td>40 billets</td></tr>
+      <tr><td>50 €</td><td>100 billets</td></tr>
+      <tr><td>30 €</td><td>200 billets</td></tr>
+      <tr><td>20 €</td><td>500 billets</td></tr>
+      <tr><td>10 €</td><td>650 billets</td></tr>
+      <tr><td><strong>Total : 72 000 €</strong></td><td><strong>1 500 billets</strong></td></tr>
+    </tbody>
+  </table>
+  <p>Tous les Billets collectors sont gagnants. Montant minimum garanti : <strong>10 €</strong>.</p>
+
+  <h2>Article 6 — Procédure de réclamation</h2>
+  <h3>6.1 Étapes</h3>
+  <ol>
+    <li>Vérification facultative du montant sur <a href="https://recompense.posty78.fr">recompense.posty78.fr</a></li>
+    <li>Prendre une photo nette de la carte entière (code alphanumérique lisible)</li>
+    <li>Envoyer la photo + son moyen de paiement (PayPal ou Revolut) en message privé sur Discord (#jd1819) ou Instagram (@posty.78)</li>
+    <li>Attendre la validation par l'Organisateur</li>
+  </ol>
+  <p>Aucune autre voie de réclamation n'est acceptée.</p>
+  <h3>6.2 Délai</h3>
+  <p>12 mois à compter de la date de distribution du billet. Passé ce délai, le Gain est définitivement perdu.</p>
+  <h3>6.3 Confidentialité</h3>
+  <p>Le Code unique ne doit jamais être communiqué publiquement. Toute divulgation publique dégage l'Organisateur de toute responsabilité.</p>
+
+  <h2>Article 7 — Validation et versement</h2>
+  <p>L'Organisateur vérifie chaque réclamation et verse le Gain <strong>sous 48 à 72 heures ouvrées</strong> via PayPal ou Revolut. Le versement vaut preuve d'attribution et clôture définitive de la réclamation.</p>
+  <p>L'Organisateur conserve pour chaque versement : screenshot du message de réclamation, photo du billet, confirmation de paiement, date et montant.</p>
+
+  <h2>Article 8 — Registre professionnel</h2>
+  <p>Un registre professionnel est tenu pour chaque réclamation validée (numéro de billet, montant, date, canal, pseudonyme, moyen de paiement, référence de transaction). Ce registre est conservé <strong>10 ans minimum</strong>.</p>
+
+  <h2>Article 9 — Protection contre la fraude</h2>
+  <p>Toute tentative de fraude ou falsification entraîne l'annulation immédiate de la réclamation et peut faire l'objet d'un signalement aux autorités compétentes.</p>
+
+  <h2>Article 10 — Données personnelles</h2>
+  <p><strong>Responsable</strong> : Jean-Didier BARATA — contact@posty78.fr<br>
+  <strong>Données collectées</strong> : pseudonyme, moyen de paiement.<br>
+  <strong>Conservation</strong> : 10 ans (obligations comptables et fiscales).<br>
+  <strong>Droits</strong> : accès, rectification, effacement sur demande à contact@posty78.fr.</p>
+
+  <h2>Article 11 — Responsabilité</h2>
+  <p>L'Organisateur ne saurait être tenu responsable en cas de perte ou vol du billet, divulgation publique du Code unique par le Participant, échec de paiement imputable à PayPal ou Revolut, ou compte de paiement invalide.</p>
+
+  <h2>Article 12 — Modification</h2>
+  <p>L'Organisateur se réserve le droit de modifier ou d'interrompre l'Opération avec un préavis minimum de 7 jours publié sur les sites officiels.</p>
+
+  <h2>Article 13 — Droit applicable et litiges</h2>
+  <p>Règlement soumis au <strong>droit français</strong>. Tout litige sera soumis aux tribunaux de Paris après tentative de résolution amiable.</p>
+
+  <div class="signature">
+    <strong>Jean-Didier BARATA — Organisateur</strong>
+    SIRET : 102 191 756 00026 — contact@posty78.fr<br>
+    Fait à Paris, le 25 juin 2026
+  </div>
+
+</main>
+
+<footer>
+  <a href="https://recompense.posty78.fr">recompense.posty78.fr</a> —
+  <a href="https://giveaway.posty78.fr">giveaway.posty78.fr</a> —
+  <a href="https://kick.com/posty78">kick.com/posty78</a>
+</footer>
+
+</body>
+</html>

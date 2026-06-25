@@ -28,9 +28,7 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font);
@@ -40,10 +38,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
 /* ─── Header ─────────────────────────────────────────────────────────────── */
 .header {
@@ -56,7 +51,7 @@ a {
 }
 
 .header__inner {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 14px 24px;
   display: flex;
@@ -83,7 +78,6 @@ a {
   font-size: 20px;
   font-weight: 900;
   color: var(--white);
-  letter-spacing: -0.01em;
 }
 
 .header__kick {
@@ -406,7 +400,7 @@ a {
 }
 
 .stats__inner {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -443,7 +437,7 @@ a {
 }
 
 .gains__inner {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -476,19 +470,9 @@ a {
   transition: border-color var(--transition);
 }
 
-.gain-item:hover {
-  border-color: var(--green);
-}
-
-.gain-item--gold {
-  border-color: rgba(245,158,11,0.4);
-  background: var(--gold-dim);
-}
-
-.gain-item--silver {
-  border-color: rgba(200,200,200,0.3);
-  background: rgba(200,200,200,0.05);
-}
+.gain-item:hover { border-color: var(--green); }
+.gain-item--gold { border-color: rgba(245,158,11,0.4); background: var(--gold-dim); }
+.gain-item--silver { border-color: rgba(200,200,200,0.3); background: rgba(200,200,200,0.05); }
 
 .gain-item__amount {
   font-size: 24px;
@@ -507,6 +491,157 @@ a {
   letter-spacing: 0.08em;
 }
 
+/* ─── Tableau des billets ────────────────────────────────────────────────── */
+.billets-section {
+  padding: 60px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.billets-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.billets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.billets-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.billets-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+
+.filter-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.filter-btn.is-active {
+  background: var(--green-dim);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.table-loader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--green);
+  padding: 20px 0;
+}
+
+.billets-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  scrollbar-width: thin;
+  scrollbar-color: var(--green) transparent;
+}
+
+.billets-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.billets-table thead {
+  background: rgba(0,255,0,0.06);
+  border-bottom: 1px solid var(--border);
+}
+
+.billets-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+.billets-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(0,255,0,0.06);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.billets-table tbody tr:hover {
+  background: rgba(0,255,0,0.04);
+}
+
+.billets-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Badges statut dans le tableau */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge--libre {
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.badge--distribue {
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(245,158,11,0.3);
+}
+
+.badge--reclame {
+  color: #fff;
+  background: rgba(239,68,68,0.2);
+  border: 1px solid rgba(239,68,68,0.4);
+}
+
+/* Couleur du gain selon montant */
+.gain--500 { color: var(--gold); text-shadow: 0 0 8px var(--gold); font-weight: 700; }
+.gain--100 { color: #e2e2e2; font-weight: 700; }
+.gain--50  { color: var(--green); font-weight: 600; }
+.gain--30  { color: var(--white); }
+.gain--20  { color: var(--white); }
+.gain--10  { color: var(--text-muted); }
+
 /* ─── Footer ─────────────────────────────────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--border);
@@ -515,7 +650,7 @@ a {
 }
 
 .footer__inner {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -543,7 +678,6 @@ a {
   font-weight: 600;
   color: var(--green);
   transition: opacity var(--transition);
-  text-shadow: 0 0 6px rgba(0,255,0,0.3);
 }
 
 .footer__links a:hover { opacity: 0.75; }
@@ -552,18 +686,16 @@ a {
 @media (max-width: 640px) {
   .hero__title { font-size: 28px; }
   .hero { padding: 40px 16px 24px; }
-
   .search-card { padding: 20px 16px; }
   .search-card__row { flex-direction: column; }
   .search-card__btn { height: 48px; }
   .search-card__input { height: 48px; font-size: 18px; }
-
   .stats__inner { grid-template-columns: repeat(2, 1fr); }
   .gains__grid { grid-template-columns: repeat(2, 1fr); }
-
   .result__grid { grid-template-columns: 1fr; }
   .result__gain { font-size: 22px !important; }
-
   .header__inner { padding: 12px 16px; }
   .header__name { font-size: 16px; }
+  .billets-header { flex-direction: column; align-items: flex-start; }
+  .billets-table td, .billets-table th { padding: 8px 12px; }
 }

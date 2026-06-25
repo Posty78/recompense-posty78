@@ -14,7 +14,6 @@
 </head>
 <body>
 
-  <!-- ─── Header ──────────────────────────────────────────────────────────── -->
   <header class="header">
     <div class="header__inner">
       <div class="header__brand">
@@ -27,14 +26,12 @@
     </div>
   </header>
 
-  <!-- ─── Hero ─────────────────────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero__inner">
       <p class="hero__eyebrow">🎁 Tous les billets sont gagnants</p>
       <h1 class="hero__title">Vérifie ton billet collector</h1>
       <p class="hero__sub">Plus de <strong>70 000 €</strong> à gagner — entre ton numéro de billet pour connaître ton gain.</p>
 
-      <!-- ─── Formulaire de recherche ──────────────────────────────────── -->
       <div class="search-card">
         <label class="search-card__label" for="billet-input">Numéro de billet</label>
         <div class="search-card__row">
@@ -52,14 +49,11 @@
         <p class="search-card__hint">Entre le numéro inscrit sur ton billet (entre 1 et 1500)</p>
       </div>
 
-      <!-- ─── Résultat ─────────────────────────────────────────────────── -->
       <div id="result" class="result" style="display:none;">
-
         <div class="result__header">
           <span id="result-numero" class="result__numero"></span>
           <span id="result-statut" class="result__statut"></span>
         </div>
-
         <div class="result__grid">
           <div class="result__cell">
             <span class="result__cell-label">Gain</span>
@@ -78,19 +72,15 @@
             <span id="result-pseudo" class="result__cell-value"></span>
           </div>
         </div>
-
         <a id="btn-claim" href="https://giveaway.posty78.fr" target="_blank" class="result__cta">
           🎁 Réclamer mon gain sur giveaway.posty78.fr
         </a>
-
       </div>
 
-      <!-- ─── Erreur ────────────────────────────────────────────────────── -->
       <div id="error" class="error-card" style="display:none;">
         <p id="error-message"></p>
       </div>
 
-      <!-- ─── Loader ────────────────────────────────────────────────────── -->
       <div id="loader" class="loader" style="display:none;">
         <div class="loader__spinner"></div>
         <span>Vérification en cours…</span>
@@ -99,7 +89,6 @@
     </div>
   </section>
 
-  <!-- ─── Stats ─────────────────────────────────────────────────────────── -->
   <section class="stats">
     <div class="stats__inner">
       <div class="stat">
@@ -121,7 +110,6 @@
     </div>
   </section>
 
-  <!-- ─── Répartition des gains ─────────────────────────────────────────── -->
   <section class="gains">
     <div class="gains__inner">
       <h2 class="gains__title">Répartition des gains</h2>
@@ -154,7 +142,45 @@
     </div>
   </section>
 
-  <!-- ─── Footer ────────────────────────────────────────────────────────── -->
+  <!-- ─── Tableau complet ────────────────────────────────────────────────── -->
+  <section class="billets-section">
+    <div class="billets-inner">
+
+      <div class="billets-header">
+        <h2 class="billets-title">📋 Tableau complet des billets</h2>
+        <div class="billets-filters">
+          <button class="filter-btn is-active" data-filter="tous">Tous</button>
+          <button class="filter-btn" data-filter="distribue">Distribués</button>
+          <button class="filter-btn" data-filter="reclame">Réclamés</button>
+          <button class="filter-btn" data-filter="libre">À distribuer</button>
+        </div>
+      </div>
+
+      <div id="table-loader" class="table-loader">
+        <div class="loader__spinner"></div>
+        <span>Chargement des billets…</span>
+      </div>
+
+      <div class="billets-table-wrap">
+        <table class="billets-table" id="billets-table">
+          <thead>
+            <tr>
+              <th>N° Billet</th>
+              <th>Gain</th>
+              <th>Statut</th>
+              <th>Distribué</th>
+              <th>Réclamé par</th>
+              <th>Date</th>
+              <th>Commentaire</th>
+            </tr>
+          </thead>
+          <tbody id="billets-tbody"></tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="footer__inner">
       <p>Tous les billets sont gagnants. Les codes de réclamation restent privés.</p>
