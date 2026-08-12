@@ -97,19 +97,19 @@ function getDate(b) {
   return (
     b["date de réclamation"] || b["date de reclamation"] ||
     b["date réclamation"]    || b["date reclamation"] ||
-    b["date"] || "—"
-  ).trim() || "—";
+    b["date"] || "-"
+  ).trim() || "-";
 }
 
 function getPseudo(b) {
   return (
     b["réclamé par"] || b["reclame par"] ||
     b["réclamé par "] || b["reclame par "] || ""
-  ).trim() || "—";
+  ).trim() || "-";
 }
 
 function getCommentaire(b) {
-  return (b["commentaire"] || "—").trim() || "—";
+  return (b["commentaire"] || "-").trim() || "-";
 }
 
 function getGainClass(gain) {
@@ -138,10 +138,10 @@ function renderTable(data) {
 
   tbody.innerHTML = filtered.map((b) => {
     const numero    = getNumero(b);
-    const gain      = b["gain"] || "—";
+    const gain      = b["gain"] || "-";
     const statut    = getStatut(b);
     const label     = getStatutLabel(statut);
-    const distribue = (b["distribué"] || b["distribue"] || b["distribué "] || "—").trim() || "—";
+    const distribue = (b["distribué"] || b["distribue"] || b["distribué "] || "-").trim() || "-";
     const pseudo    = getPseudo(b);
     const date      = getDate(b);
     const comment   = getCommentaire(b);
@@ -196,7 +196,7 @@ function showResult(billet, numero) {
 
   document.getElementById("result-numero").textContent = `Billet n°${numero}`;
 
-  const gain   = billet["gain"] || "—";
+  const gain   = billet["gain"] || "-";
   document.getElementById("result-gain").textContent = gain;
 
   const statut = getStatut(billet);
