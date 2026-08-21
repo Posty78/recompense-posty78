@@ -1,0 +1,44 @@
+name: Synchronise vers 365-posty78
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout recompense-posty78
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout 365-posty78
+        uses: actions/checkout@v4
+        with:
+          repository: Posty78/365-posty78
+          token: ${{ secrets.HUB_SYNC_TOKEN }}
+          path: hub
+
+      - name: Copie vers hub/recompense/
+        run: |
+          rsync -a --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='index.html' \
+            --exclude='CNAME' \
+            --exclude='.nojekyll' \
+            source/ hub/recompense/
+
+      - name: Commit et push si changement
+        run: |
+          cd hub
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add recompense/
+          if git diff --cached --quiet; then
+            echo "Rien a synchroniser."
+            exit 0
+          fi
+          git commit -m "Sync auto depuis recompense-posty78@${GITHUB_SHA::7}"
+          git push
