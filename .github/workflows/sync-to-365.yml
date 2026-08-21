@@ -22,10 +22,13 @@ jobs:
 
       - name: Copie vers hub/recompense/
         run: |
+          # Toutes les pages .html de ce repo sont des redirections figees vers 365.posty78.fr
+          # (le vrai contenu vit desormais uniquement dans 365-posty78) : on ne synchronise que
+          # les assets reels (css/js/data/favicon), jamais les .html, pour ne pas ecraser le contenu réel.
           rsync -a --delete \
             --exclude='.git' \
             --exclude='.github' \
-            --exclude='index.html' \
+            --exclude='*.html' \
             --exclude='CNAME' \
             --exclude='.nojekyll' \
             source/ hub/recompense/
